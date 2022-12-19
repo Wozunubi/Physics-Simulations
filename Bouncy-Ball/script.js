@@ -17,21 +17,18 @@ function cY(pos) {
     return canvas.height - pos.y * cFactor;
 }
 
-function setting() {
-    
-}
-
+var colour = "#FF0000";
 var g = -10.0;
 var dt = 1.0 / 60.0;
 var ball = {
     radius: 0.2,
     pos: {x: 0.2, y: 0.2},
-    vel: {x: 10.0, y: 20.0}
+    vel: {x: 10.0, y: 15.0}
 };
 
 function draw() {
     c.clearRect(0, 0, canvas.width, canvas.height);
-    c.fillStyle = "#FF0000";
+    c.fillStyle = colour;
 
     c.beginPath();
     c.arc(cX(ball.pos), cY(ball.pos), cFactor * ball.radius, 0, 2 * Math.PI);
@@ -60,6 +57,14 @@ function simulate() {
         ball.pos.y = simHeight-ball.radius;
         ball.vel.y *= -1;
     }
+}
+
+function settings() {
+    if (document.getElementById("radius").value != "") ball.radius = parseFloat(document.getElementById("radius").value);
+    if (document.getElementById("colour").value != "") colour = document.getElementById("colour").value;
+    if (document.getElementById("velX").value != "") ball.vel.x = parseFloat(document.getElementById("velX").value);
+    if (document.getElementById("velY").value != "") ball.vel.y = parseFloat(document.getElementById("velY").value);
+    if (document.getElementById("gravity").value != "") g = parseFloat(document.getElementById("gravity").value);
 }
 
 function update() {
